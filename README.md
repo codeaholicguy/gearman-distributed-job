@@ -1,2 +1,2 @@
-# gearman-job-queue
-An implementation Gearman Job Queue
+# gearman-lib
+A Library for using Gearman
