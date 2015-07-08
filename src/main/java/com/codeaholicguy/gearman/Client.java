@@ -24,7 +24,9 @@ public class Client {
     public static Client getInstance(Configuration configuration) {
         if (instance == null) {
             synchronized (Client.class) {
-                instance = new Client(configuration);
+                if (instance == null) {
+                    instance = new Client(configuration);
+                }
             }
         }
 

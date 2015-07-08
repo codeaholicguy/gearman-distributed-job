@@ -23,7 +23,9 @@ public class Server {
     public static Server getInstance(Configuration configuration) {
         if (instance == null) {
             synchronized (Server.class) {
-                instance = new Server(configuration);
+                if (instance == null) {
+                    instance = new Server(configuration);
+                }
             }
         }
 
