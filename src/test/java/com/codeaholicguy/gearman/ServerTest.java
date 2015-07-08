@@ -5,7 +5,7 @@ import com.codeaholicguy.gearman.config.Configuration;
 /**
  * @author hoangnn
  */
-public class GearmanManagerTest {
+public class ServerTest {
 
     public static void main(String[] args) {
         Configuration configuration = new Configuration(
@@ -14,11 +14,12 @@ public class GearmanManagerTest {
                 4730,
                 8,
                 1000,
+                50,
                 "gearman-test-function",
                 "com.codeaholicguy.gearman.WorkerTest");
 
-        GearmanManager gearmanManager = new GearmanManager(configuration);
-        gearmanManager.start();
+        Server server = Server.getInstance(configuration);
+        server.start();
 
     }
 }

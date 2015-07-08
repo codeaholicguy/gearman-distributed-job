@@ -11,14 +11,26 @@ import java.util.List;
 /**
  * @author hoangnn
  */
-public class GearmanManager {
+public class Server {
 
-    private static final Logger LOGGER = Logger.getLogger(GearmanManager.class);
+    private static final Logger LOGGER = Logger.getLogger(Server.class);
 
     private Configuration configuration;
     private List<Worker> workers;
 
-    public GearmanManager(Configuration configuration) {
+    private static Server instance;
+
+    public static Server getInstance(Configuration configuration) {
+        if (instance == null) {
+            synchronized (Server.class) {
+                instance = new Server(configuration);
+            }
+        }
+
+        return instance;
+    }
+
+    private Server(Configuration configuration) {
         this.configuration = configuration;
         this.workers = new ArrayList<Worker>();
     }
@@ -28,11 +40,11 @@ public class GearmanManager {
 
             LOGGER.info(String.format("Starting service %s with %s worker(s)",
                     this.configuration.getInstance(),
-                    this.configuration.getSize()));
+                    this.configuration.getThreadSize()));
 
             Worker worker;
             Thread thread;
-            for (int i = 0; i < this.configuration.getSize(); i++) {
+            for (int i = 0; i < this.configuration.getThreadSize(); i++) {
                 LOGGER.info(String.format("Starting worker %s", i));
                 worker = new Worker(configuration);
 

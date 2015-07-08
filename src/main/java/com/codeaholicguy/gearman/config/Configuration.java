@@ -8,16 +8,18 @@ public class Configuration {
     private String instance;
     private String host;
     private int port;
-    private int size;
+    private int threadSize;
+    private int queueSize;
     private int idleTime;
     private String function;
     private String className;
 
-    public Configuration(String instance, String host, int port, int size, int idleTime, String function, String className) {
+    public Configuration(String instance, String host, int port, int threadSize, int queueSize, int idleTime, String function, String className) {
         this.instance = instance;
         this.host = host;
         this.port = port;
-        this.size = size;
+        this.threadSize = threadSize;
+        this.queueSize = queueSize;
         this.idleTime = idleTime;
         this.function = function;
         this.className = className;
@@ -47,12 +49,20 @@ public class Configuration {
         this.port = port;
     }
 
-    public int getSize() {
-        return size;
+    public int getThreadSize() {
+        return threadSize;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setThreadSize(int threadSize) {
+        this.threadSize = threadSize;
+    }
+
+    public int getQueueSize() {
+        return queueSize;
+    }
+
+    public void setQueueSize(int queueSize) {
+        this.queueSize = queueSize;
     }
 
     public int getIdleTime() {
@@ -85,7 +95,8 @@ public class Configuration {
         sb.append("instance='").append(instance).append('\'');
         sb.append(", host='").append(host).append('\'');
         sb.append(", port=").append(port);
-        sb.append(", size=").append(size);
+        sb.append(", threadSize=").append(threadSize);
+        sb.append(", queueSize=").append(queueSize);
         sb.append(", idleTime=").append(idleTime);
         sb.append(", function='").append(function).append('\'');
         sb.append(", className='").append(className).append('\'');
