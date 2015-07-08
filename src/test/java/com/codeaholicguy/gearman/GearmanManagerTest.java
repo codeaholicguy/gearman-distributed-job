@@ -5,7 +5,7 @@ import com.codeaholicguy.gearman.config.Configuration;
 /**
  * @author hoangnn
  */
-public class GearmanWorkerTest {
+public class GearmanManagerTest {
 
     public static void main(String[] args) {
         Configuration configuration = new Configuration(
