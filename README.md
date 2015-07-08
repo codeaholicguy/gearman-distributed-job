@@ -1,2 +1,2 @@
-# gearman-lib
-A Library for using Gearman
+# gearman-distributed-job
+Familiar with Gearman distributed job 
