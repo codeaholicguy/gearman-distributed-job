@@ -13,6 +13,7 @@ public class GearmanWorkerTest {
                 "127.0.0.1",
                 4730,
                 8,
+                1000,
                 "gearman-test-function",
                 "com.codeaholicguy.gearman.WorkerTest");
 

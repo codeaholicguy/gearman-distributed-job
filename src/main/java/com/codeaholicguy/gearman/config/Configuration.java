@@ -9,14 +9,16 @@ public class Configuration {
     private String host;
     private int port;
     private int size;
+    private int idleTime;
     private String function;
     private String className;
 
-    public Configuration(String instance, String host, int port, int size, String function, String className) {
+    public Configuration(String instance, String host, int port, int size, int idleTime, String function, String className) {
         this.instance = instance;
         this.host = host;
         this.port = port;
         this.size = size;
+        this.idleTime = idleTime;
         this.function = function;
         this.className = className;
     }
@@ -53,6 +55,14 @@ public class Configuration {
         this.size = size;
     }
 
+    public int getIdleTime() {
+        return idleTime;
+    }
+
+    public void setIdleTime(int idleTime) {
+        this.idleTime = idleTime;
+    }
+
     public String getFunction() {
         return function;
     }
@@ -76,6 +86,7 @@ public class Configuration {
         sb.append(", host='").append(host).append('\'');
         sb.append(", port=").append(port);
         sb.append(", size=").append(size);
+        sb.append(", idleTime=").append(idleTime);
         sb.append(", function='").append(function).append('\'');
         sb.append(", className='").append(className).append('\'');
         sb.append('}');

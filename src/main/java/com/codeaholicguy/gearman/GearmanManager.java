@@ -5,6 +5,7 @@ import com.codeaholicguy.gearman.runnable.Worker;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -46,10 +47,51 @@ public class GearmanManager {
     }
 
     public boolean stop() {
-        return false;
+        Iterator<Worker> isRunningWorkers = this.workers.iterator();
+
+        Worker worker;
+        while (isRunningWorkers.hasNext()) {
+            worker = isRunningWorkers.next();
+            worker.stop();
+        }
+
+        boolean isRunning = true;
+
+        while (isRunning) {
+            isRunning = false;
+            isRunningWorkers = this.workers.iterator();
+
+            while (isRunningWorkers.hasNext()) {
+                worker = isRunningWorkers.next();
+                if (worker.isRunning()) {
+                    isRunning = true;
+                    break;
+                }
+            }
+
+            try {
+                Thread.sleep(configuration.getIdleTime());
+            } catch (InterruptedException e) {
+                LOGGER.error(e.getMessage(), e);
+            }
+        }
+
+        LOGGER.info("Worker is stopped.");
+        return true;
     }
 
     public boolean status() {
-        return false;
+        Iterator<Worker> isRunningWorkers = this.workers.iterator();
+
+        Worker worker;
+        do {
+            if (!isRunningWorkers.hasNext()) {
+                return false;
+            }
+
+            worker = isRunningWorkers.next();
+        } while (!worker.isRunning());
+
+        return true;
     }
 }
